@@ -1,0 +1,10 @@
+#rps-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    margin: 25px 10px;
+    gap: 25px;
+    
+}
+
