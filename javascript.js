@@ -1,16 +1,24 @@
 
+// counters 
+let timesLost = 0;
+let timesWon = 0;
+let ties = 0;
+let finalResult = "";
+let i = 0;
+
+// add buttons funcionality
 const score = document.querySelector('#score');
 const resultInfo = document.createElement('p');
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        playRound(getComputerChoice(),button.classList)
+        playRound(getComputerChoice(), button.classList)
+        
     })
 })
 
-
-
+const resetButton = document.createElement('button');
 
 /* Function to generate a random choice limited to 3, transform into an 
 string, and return it*/
@@ -51,8 +59,56 @@ function playRound(machineChoice, playerChoice) {
     resultInfo.setAttribute('style', 'white-space: pre;')
     resultInfo.textContent = "You chose "+ playerChoice + "\r\n" + "The computer chose " + machineChoice + "\r\n" + result;
     score.appendChild(resultInfo);
+
+    // iterate i to make game last 5 rounds only
+    i++;
+
+    if (result == "You lost!") {
+            timesLost += 1;
+        } else if (result == "You've won!") {
+            timesWon += 1;
+        } else {
+            ties += 1;
+    }
+
+    // when 5 rounds played end game and show score
+    if (i == 5) {
+        if (timesWon > timesLost) {
+            finalResult = "You're the ultimate winner!";        
+        } else if (timesWon < timesLost) {
+            finalResult = "The machine is the ultimate winner!";
+        } else {
+            finalResult = "It's a tie"
+        }
+    
+        resultInfo.textContent += "\r\n \r\nThe machine won " + timesLost + " times \r\n" + "You've won " + timesWon + " times \r\n" + "number of ties " + ties + "\r\n" + finalResult;
+        
+        // remove buttons so it can be replaced by a reset button
+        buttons.forEach((button) => {
+            button.remove();
+        })
+
+        
+        // reset button creation and function
+        const reset = document.querySelector('#rps-buttons');
+
+        resetButton.textContent = "Reset";
+        const right = document.querySelector('.right');
+        const left = document.querySelector('.left');
+        reset.insertBefore(resetButton, right);
+        right.textContent = "<< Reset game";
+        left.textContent = "Reset game >>";
+
+        
+        resetButton.addEventListener('click', () => {
+            window.location.reload();
+        })
+    }
+    
 }
 
+
+// old code
 
 // // function to play a set of game rounds
 // function game() {
