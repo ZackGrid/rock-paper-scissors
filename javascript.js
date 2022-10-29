@@ -6,12 +6,13 @@ let ties = 0;
 let finalResult = "";
 let i = 0;
 
-// add buttons funcionality
+
 const score = document.querySelector('#score');
 const resultInfo = document.createElement('p');
 const final = document.createElement('p');
+const scoreVs = document.createElement('p');
 
-
+// add buttons funcionality
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -59,7 +60,8 @@ function playRound(machineChoice, playerChoice) {
         result = "You lost!"
     }
     resultInfo.setAttribute('style', 'white-space: pre;')
-    resultInfo.textContent = "You chose "+ playerChoice + "\r\n" + "The computer chose " + machineChoice + "\r\n" + result;
+    resultInfo.textContent = "You chose " + playerChoice + "\r\n" + "The computer chose " + machineChoice + "\r\n" + result;
+    
     score.appendChild(resultInfo);
     
 
@@ -74,6 +76,11 @@ function playRound(machineChoice, playerChoice) {
             ties += 1;
     }
 
+    //score board
+    scoreVs.setAttribute('style', 'white-space: pre;')
+    scoreVs.textContent = "Human: " + timesWon + "\r\nMachine: " + timesLost + "\r\nTies: " + ties;
+    score.appendChild(scoreVs);
+
     // when 5 rounds played end game and show score
     if (i == 5) {
         if (timesWon > timesLost) {
@@ -83,9 +90,11 @@ function playRound(machineChoice, playerChoice) {
         } else {
             finalResult = "It's a tie"
         }
-    
-        resultInfo.textContent += "\r\n \r\nThe machine won " + timesLost + " times \r\n" + "You've won " + timesWon + " times \r\n" + "number of ties " + ties + "\r\n";
+        
+        //replaced by score board
+        // resultInfo.textContent += "\r\n \r\nThe machine won " + timesLost + " times \r\n" + "You've won " + timesWon + " times \r\n" + "number of ties " + ties + "\r\n";
 
+        
         final.classList.add('final');
         final.textContent = finalResult;
         final.style.cssText = 'color: cyan; background-color: rgb(29, 27, 25); font-size: 25px; font-weight: 500';
