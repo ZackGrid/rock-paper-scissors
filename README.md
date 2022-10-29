@@ -1,2 +1,3 @@
 # rock-paper-scissors
-A simple rock paper scissors game using javascript
+
+versão em portugues br

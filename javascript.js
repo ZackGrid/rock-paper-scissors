@@ -29,13 +29,13 @@ function getComputerChoice() {
     let computerChoice = "";
     switch(choiceN) {
         case 0:
-            computerChoice = "rock";
+            computerChoice = "pedra";
             break;
         case 1:
-            computerChoice = "paper";
+            computerChoice = "papel";
             break;
         case 2:
-            computerChoice = "scissors"
+            computerChoice = "tesoura"
             break;
     }
     
@@ -48,25 +48,25 @@ function playRound(machineChoice, playerChoice) {
     let result;
 
     if (playerChoice == machineChoice) {
-        result = "It's a tie"; 
-    } else if (playerChoice == "rock" && machineChoice == "scissors") {
-        result = "You've won!";
-    } else if (playerChoice == "paper" && machineChoice == "rock") {
-        result = "You've won!";
-    } else if (playerChoice == "scissors" && machineChoice == "paper") {
-        result = "You've won!";
+        result = "Empate"; 
+    } else if (playerChoice == "pedra" && machineChoice == "tesoura") {
+        result = "Você ganhou!";
+    } else if (playerChoice == "papel" && machineChoice == "pedra") {
+        result = "Você ganhou!";
+    } else if (playerChoice == "tesoura" && machineChoice == "papel") {
+        result = "Você ganhou!";
     } else {
-        result = "You lost!"
+        result = "Você perdeu!"
     }
     resultInfo.setAttribute('style', 'white-space: pre;')
-    resultInfo.textContent = "You chose " + playerChoice + "\r\n" + "The computer chose " + machineChoice + "\r\n" + result;
+    resultInfo.textContent = "Você escolheu " + playerChoice + "\r\n" + "A máquina escolheu " + machineChoice + "\r\n" + result;
     
     score.appendChild(resultInfo);
     
 
-    if (result == "You lost!") {
+    if (result == "Você perdeu!") {
             timesLost += 1;
-        } else if (result == "You've won!") {
+        } else if (result == "Você ganhou!") {
             timesWon += 1;
         } else {
             ties += 1;
@@ -74,15 +74,15 @@ function playRound(machineChoice, playerChoice) {
 
     //score board
     scoreVs.setAttribute('style', 'white-space: pre;')
-    scoreVs.textContent = "Human: " + timesWon + "\r\nMachine: " + timesLost + "\r\nTies: " + ties;
+    scoreVs.textContent = "Humano: " + timesWon + "\r\nMaquina: " + timesLost + "\r\nEmpates: " + ties;
     score.appendChild(scoreVs);
 
     // first to make 5 points end game and show score
     if (timesLost == 5 || timesWon == 5) {
         if (timesWon > timesLost) {
-            finalResult = "You're the ultimate winner!";        
+            finalResult = "Você é o vencedor na luta contra a máquina!";        
         } else if (timesWon < timesLost) {
-            finalResult = "The machine is the ultimate winner!";
+            finalResult = "A máquina ganhou e dominará o mundo!";
         } 
         
         //replaced by score board
@@ -108,8 +108,8 @@ function playRound(machineChoice, playerChoice) {
         const right = document.querySelector('.right');
         const left = document.querySelector('.left');
         reset.appendChild(resetButton);
-        right.textContent = "<< Reset game";
-        left.textContent = "Reset game >>";
+        right.textContent = "<< Tentar novamente";
+        left.textContent = "Tentar novamente >>";
 
         
         resetButton.addEventListener('click', () => {
