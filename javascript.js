@@ -9,6 +9,8 @@ let i = 0;
 // add buttons funcionality
 const score = document.querySelector('#score');
 const resultInfo = document.createElement('p');
+const final = document.createElement('p');
+
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
@@ -59,6 +61,7 @@ function playRound(machineChoice, playerChoice) {
     resultInfo.setAttribute('style', 'white-space: pre;')
     resultInfo.textContent = "You chose "+ playerChoice + "\r\n" + "The computer chose " + machineChoice + "\r\n" + result;
     score.appendChild(resultInfo);
+    
 
     // iterate i to make game last 5 rounds only
     i++;
@@ -81,7 +84,12 @@ function playRound(machineChoice, playerChoice) {
             finalResult = "It's a tie"
         }
     
-        resultInfo.textContent += "\r\n \r\nThe machine won " + timesLost + " times \r\n" + "You've won " + timesWon + " times \r\n" + "number of ties " + ties + "\r\n" + finalResult;
+        resultInfo.textContent += "\r\n \r\nThe machine won " + timesLost + " times \r\n" + "You've won " + timesWon + " times \r\n" + "number of ties " + ties + "\r\n";
+
+        final.classList.add('final');
+        final.textContent = finalResult;
+        final.style.cssText = 'color: cyan; background-color: rgb(29, 27, 25); font-size: 25px; font-weight: 500';
+        score.appendChild(final);
         
         // remove buttons so it can be replaced by a reset button
         buttons.forEach((button) => {
@@ -90,12 +98,13 @@ function playRound(machineChoice, playerChoice) {
 
         
         // reset button creation and function
-        const reset = document.querySelector('#rps-buttons');
+        const reset = document.querySelector('.buttons');
 
         resetButton.textContent = "Reset";
+        resetButton.classList.add('reset');
         const right = document.querySelector('.right');
         const left = document.querySelector('.left');
-        reset.insertBefore(resetButton, right);
+        reset.appendChild(resetButton);
         right.textContent = "<< Reset game";
         left.textContent = "Reset game >>";
 
