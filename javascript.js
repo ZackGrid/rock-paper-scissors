@@ -4,7 +4,6 @@ let timesLost = 0;
 let timesWon = 0;
 let ties = 0;
 let finalResult = "";
-let i = 0;
 
 
 const score = document.querySelector('#score');
@@ -48,7 +47,7 @@ function playRound(machineChoice, playerChoice) {
 
     let result;
 
-    if (playerChoice === machineChoice) {
+    if (playerChoice == machineChoice) {
         result = "It's a tie"; 
     } else if (playerChoice == "rock" && machineChoice == "scissors") {
         result = "You've won!";
@@ -65,9 +64,6 @@ function playRound(machineChoice, playerChoice) {
     score.appendChild(resultInfo);
     
 
-    // iterate i to make game last 5 rounds only
-    i++;
-
     if (result == "You lost!") {
             timesLost += 1;
         } else if (result == "You've won!") {
@@ -81,15 +77,13 @@ function playRound(machineChoice, playerChoice) {
     scoreVs.textContent = "Human: " + timesWon + "\r\nMachine: " + timesLost + "\r\nTies: " + ties;
     score.appendChild(scoreVs);
 
-    // when 5 rounds played end game and show score
-    if (i == 5) {
+    // first to make 5 points end game and show score
+    if (timesLost == 5 || timesWon == 5) {
         if (timesWon > timesLost) {
             finalResult = "You're the ultimate winner!";        
         } else if (timesWon < timesLost) {
             finalResult = "The machine is the ultimate winner!";
-        } else {
-            finalResult = "It's a tie"
-        }
+        } 
         
         //replaced by score board
         // resultInfo.textContent += "\r\n \r\nThe machine won " + timesLost + " times \r\n" + "You've won " + timesWon + " times \r\n" + "number of ties " + ties + "\r\n";
